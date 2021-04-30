@@ -31,8 +31,8 @@ public extension UITextView {
 
   var textPublisher: AnyPublisher<String?, Never> { valuePublisher }
 
-  /// A publisher that emits whenever the user taps the return button and ends the editing on the text view.
-  var returnPublisher: AnyPublisher<Void, Never> {
+  /// A publisher that emits whenever the user taps elsewhere ending editing of the text field.
+  var didEndEditingPublisher: AnyPublisher<Void, Never> {
     NotificationCenter.default
       .publisher(for: UITextView.textDidEndEditingNotification, object: self)
       .map { _ in Void() }

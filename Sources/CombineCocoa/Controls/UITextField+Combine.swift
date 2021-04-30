@@ -29,6 +29,11 @@ public extension UITextField {
         controlEventPublisher(for: .editingDidEndOnExit)
     }
 
+    /// A publisher that emits whenever the user taps elsewhere ending editing of the text field.
+    var didEndEditingPublisher: AnyPublisher<Void, Never> {
+        controlEventPublisher(for: .editingDidEnd)
+    }
+
     /// A publisher that emits whenever the user taps the text fields and begin the editing.
     var didBeginEditingPublisher: AnyPublisher<Void, Never> {
         controlEventPublisher(for: .editingDidBegin)
