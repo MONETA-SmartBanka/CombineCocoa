@@ -39,7 +39,7 @@ public extension UISearchBar {
             .map { _ in () }
             .eraseToAnyPublisher()
     }
-    
+
     var didBeginEditingPublisher: AnyPublisher<Void, Never> {
         let selector = #selector(UISearchBarDelegate.searchBarTextDidBeginEditing(_:))
         return delegateProxy

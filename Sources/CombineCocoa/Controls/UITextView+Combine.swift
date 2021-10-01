@@ -12,39 +12,39 @@ import Combine
 
 @available(iOS 13.0, *)
 public extension UITextView {
-  /// A Combine publisher for the `UITextView's` value.
-  ///
-  /// - note: This uses the underlying `NSTextStorage` to make sure
-  ///         autocorrect changes are reflected as well.
-  ///
-  /// - seealso: https://git.io/JJM5Q
-  var valuePublisher: AnyPublisher<String?, Never> {
-    Deferred { [weak textView = self] in
-      textView?.textStorage
-        .didProcessEditingRangeChangeInLengthPublisher
-        .map { _ in textView?.text }
-        .prepend(textView?.text)
-        .eraseToAnyPublisher() ?? Empty().eraseToAnyPublisher()
+    /// A Combine publisher for the `UITextView's` value.
+    ///
+    /// - note: This uses the underlying `NSTextStorage` to make sure
+    ///         autocorrect changes are reflected as well.
+    ///
+    /// - seealso: https://git.io/JJM5Q
+    var valuePublisher: AnyPublisher<String?, Never> {
+        Deferred { [weak textView = self] in
+            textView?.textStorage
+                .didProcessEditingRangeChangeInLengthPublisher
+                .map { _ in textView?.text }
+                .prepend(textView?.text)
+                .eraseToAnyPublisher() ?? Empty().eraseToAnyPublisher()
+        }
+        .eraseToAnyPublisher()
     }
-    .eraseToAnyPublisher()
-  }
 
-  var textPublisher: AnyPublisher<String?, Never> { valuePublisher }
+    var textPublisher: AnyPublisher<String?, Never> { valuePublisher }
 
-  /// A publisher that emits whenever the user taps elsewhere ending editing of the text field.
-  var didEndEditingPublisher: AnyPublisher<Void, Never> {
-    NotificationCenter.default
-      .publisher(for: UITextView.textDidEndEditingNotification, object: self)
-      .map { _ in Void() }
-      .eraseToAnyPublisher()
-  }
+    /// A publisher that emits whenever the user taps elsewhere ending editing of the text field.
+    var didEndEditingPublisher: AnyPublisher<Void, Never> {
+        NotificationCenter.default
+            .publisher(for: UITextView.textDidEndEditingNotification, object: self)
+            .map { _ in Void() }
+            .eraseToAnyPublisher()
+    }
 
-  /// A publisher that emits whenever the user taps the text views and begin the editing.
-  var didBeginEditingPublisher: AnyPublisher<Void, Never> {
-    NotificationCenter.default
-      .publisher(for: UITextView.textDidBeginEditingNotification, object: self)
-      .map { _ in Void() }
-      .eraseToAnyPublisher()
-  }
+    /// A publisher that emits whenever the user taps the text views and begin the editing.
+    var didBeginEditingPublisher: AnyPublisher<Void, Never> {
+        NotificationCenter.default
+            .publisher(for: UITextView.textDidBeginEditingNotification, object: self)
+            .map { _ in Void() }
+            .eraseToAnyPublisher()
+    }
 }
 #endif

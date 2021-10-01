@@ -35,7 +35,7 @@ class UICollectionViewTests: XCTestCase {
     func test_didDeselectItemAt() {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
 
-        var resultIndexPath: IndexPath? = nil
+        var resultIndexPath: IndexPath?
 
         collectionView.didDeselectItemPublisher
             .sink(receiveValue: { resultIndexPath = $0 })
@@ -50,7 +50,7 @@ class UICollectionViewTests: XCTestCase {
     func test_willDisplayCell() {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
 
-        var resultIndexPath: IndexPath? = nil
+        var resultIndexPath: IndexPath?
         var resultCollectioViewCell: UICollectionViewCell? = nil
 
         collectionView.willDisplayCellPublisher

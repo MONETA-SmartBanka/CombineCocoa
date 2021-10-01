@@ -19,25 +19,25 @@ class ControlsViewController: UIViewController {
     @IBOutlet private var datePicker: UIDatePicker!
     @IBOutlet private var console: UITextView!
     @IBOutlet private var rightBarButtonItem: UIBarButtonItem!
-    
+
     private var subscriptions = Set<AnyCancellable>()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Set up some gesture recognizers
         let leftSwipe = UISwipeGestureRecognizer()
         leftSwipe.direction = .left
         view.addGestureRecognizer(leftSwipe)
-        
+
         let longPress = UILongPressGestureRecognizer()
         longPress.minimumPressDuration = 2
         view.addGestureRecognizer(longPress)
-        
+
         let doubleTap = UITapGestureRecognizer()
         doubleTap.numberOfTapsRequired = 2
         view.addGestureRecognizer(doubleTap)
-        
+
         // Each merge can go up to 8 elements, so we have to chain a few of them ;-)
         Just("Debug Output:")
             .merge(with: segmented.selectedSegmentIndexPublisher.map { "Segmented at index \($0)" },

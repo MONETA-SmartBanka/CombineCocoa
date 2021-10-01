@@ -19,6 +19,12 @@ public extension UIScrollView {
             .eraseToAnyPublisher()
     }
 
+    /// A publisher emitting content size changes from this UIScrollView.
+    var contentSizePublisher: AnyPublisher<CGSize, Never> {
+        publisher(for: \.contentSize)
+            .eraseToAnyPublisher()
+    }
+
     /// A publisher emitting if the bottom of the UIScrollView is reached.
     ///
     /// - parameter offset: A threshold indicating how close to the bottom of the UIScrollView this publisher should emit.
